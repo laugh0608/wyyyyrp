@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: linear-gradient(-225deg, #2CD8D5 0%, #C5C1FF 56%, #FFBAC3 100%);
+            background-size: 350%;
+            animation: bganimation 7s infinite;
+        }
+
+        @keyframes bganimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wangyiyun"></div>
+    <br>
+    <br>
+    <br>
+    <div id="chuchu"></div>
+    <script>
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.open('GET', 'https://api.uomg.com/api/comments.163?format=text', true);
+        httpRequest.send();
+        httpRequest.onreadystatechange = function () {
+            if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+                var res = httpRequest.responseText;
+                console.log(res);
+                var str_before = res.split('来自@')[0];
+                var str_after = res.split('来自@')[1];
+                document.getElementById("wangyiyun").innerHTML = str_before
+                document.getElementById("chuchu").innerHTML = '评论来自： ' + str_after
+            }
+        };
+    </script>
+</body>
+
+</html>
